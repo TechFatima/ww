@@ -21,7 +21,9 @@
 
 <script>
 $(document).ready(function(){
-    $.getJSON("ww/data/biodata.json", function(data){
+    // Correct path with leading /ww/ for GitHub Pages
+    $.getJSON("/ww/data/biodata.json")
+    .done(function(data){
         let html = `
             <table>
                 <tr><td>Name</td><td>${data.name}</td></tr>
@@ -33,9 +35,14 @@ $(document).ready(function(){
             </table>
         `;
         $("#biodata-box").html(html);
+    })
+    .fail(function(jqxhr, textStatus, error){
+        console.log("Request Failed: " + textStatus + ", " + error);
+        $("#biodata-box").html("<h2 style='color:red;text-align:center;'>Failed to load biodata.json</h2>");
     });
 });
 </script>
 
 </body>
 </html>
+
