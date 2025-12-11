@@ -1,37 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>Bio-data</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery-3.6.0.min.js"></script>
-    <style>
-        table {
-            width: 50%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            font-size: 16px;
-        }
-        table, td, th {
-            border: 1px solid #5a189a;
-        }
-        td, th {
-            padding: 10px;
-        }
-        th {
-            background-color: #5a189a;
-            color: white;
-            text-align: left;
-        }
-    </style>
 </head>
 <body>
 
-<h1 class="title" style="text-align:center; color:#5a189a;">Bio-data</h1>
+<h1 class="title">Bio-data</h1>
 
-<nav style="text-align:center; margin-bottom:20px;">
-    <a href="index.html">Home</a> |
-    <a href="resume.html">Resume</a> |
+<nav>
+    <a href="index.html">Home</a>
+    <a href="resume.html">Resume</a>
     <a href="biodata.html">Bio-data</a>
 </nav>
 
@@ -41,15 +21,9 @@
 
 <script>
 $(document).ready(function(){
-    console.log("Script loaded");
-
-    $.getJSON("/ww/data/biodata.json")
-    .done(function(data){
-        console.log("JSON loaded:", data);
-
+    $.getJSON("data/biodata.json", function(data){
         let html = `
             <table>
-                <tr><th>Field</th><th>Details</th></tr>
                 <tr><td>Name</td><td>${data.name}</td></tr>
                 <tr><td>DOB</td><td>${data.dob}</td></tr>
                 <tr><td>Gender</td><td>${data.gender}</td></tr>
@@ -59,13 +33,10 @@ $(document).ready(function(){
             </table>
         `;
         $("#biodata-box").html(html);
-    })
-    .fail(function(jqxhr, textStatus, error){
-        console.error("Request Failed:", textStatus, error);
-        $("#biodata-box").html("<h2 style='color:red;text-align:center;'>Failed to load biodata.json</h2>");
     });
 });
 </script>
 
 </body>
 </html>
+
